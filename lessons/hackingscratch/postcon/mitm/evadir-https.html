@@ -1,0 +1,70 @@
+---
+title: EXCLUSIVO - ¿Cómo evadir HTTPS?
+course: hackingscratch
+section: "Hackeo de redes - Man In The Middle"
+nofooter: 1
+layout: lesson
+---
+
+Ahora que sabemos como funciona el protocolo HTTPS, como podemos evadirlo y ya
+instalamos las caplets de BetterCAP, ahora vamos a empezar a utilizar una de
+ellas para convertir las peticiones HTTPS a HTTP que realiza nuestra víctima y
+robar los datos que obtiene en páginas "seguras".
+
+Primero, abriremos una terminal e iniciaremos BetterCAP de la misma forma que
+lo hemos estado haciendo hasta ahora:
+
+```bash
+bettercap -iface enp1s0 -caplet ~/arp.cap
+```
+
+Con ese comando estamos ejecutando BetterCAP y estamos especificando el nombre
+de la interfaz de red que tenemos conectada en nuestra red objetivo usando el
+argumento _-iface_ y también estamos haciendo uso del argumento _-caplet_ para
+especificar un caplet que será ejecutando tan pronto se empiece a ejecutar
+BetterCAP.
+
+Una vez estemos ejecutando ese comando, ya estaremos ejecutando el módulo
+_net.probe_ y un ataque ARP Spoofing contra la dirección IP que especificamos
+en la caplet que creamos. Lo siguiente que haremos ahora es ejecutar el
+caplet _hstshijack_.
+
+Primero que todo, la caplet _hstshijack_ es una de las tantas caplets que
+BetterCAP tiene para nosotros, si quieres ver todas las caplets que BetterCAP
+tiene disponibles, puedes ejecutar _caplets.show_ y obtendrás una lista de todas
+las caplets disponibles para ser ejecutadas.
+
+Para ejecutar cualquier de esas caplets, todo lo que tienes que hacer es,
+literalmente escribir su nombre, por ejemplo, para ejecutar la caplet
+hstshijack, ejecutaríamos:
+
+```bash
+hstshijack/hstshijack
+```
+
+Ten en cuenta que gracias al sistema de autocompletación de BetterCAP puedes
+escribir solo "hstsh" y presionar TAB y BetterCAP te completará el nombre de
+esta caplet automáticamente.
+
+Una vez ejecutes esta caplet, ya podrás visitar algunos sitios web que usen
+HTTP y convertirlo en un sitio HTTP.
+
+Una buena idea antes de intentar cualquiera de estos ataques es remover todos
+tus datos de navegación como caché, historial y esas cosas, porque los sitios
+a los que accederemos es posible que estén almacenados en nuestro caché y, en
+lugar de realizar una petición al servidor del sitio web acceda a los datos
+almacenados en el caché de tu computadora/víctima y no veas ningún cambio. Esto
+solo será necesario si estás visitando el mismo sitio web una y otra vez, más
+que nada cuando se están haciendo pruebas (hacer esto no será necesario en algún
+escenario real).
+
+Ahora podemos convertir cualquier conexión HTTPS en HTTP siempre y cuando el
+sitio web utilice HTTPS y no HSTS. Este método funcionará contra casi todos los
+sitios web que ejecuten HTTPS excepto por los más populares, como Facebook,
+Twiiter, etcetera.
+
+Ten en cuenta que esta caplet no convertirá ninguna dirección HTTPS a HTTP
+automáticamente en los sitios web que visite tu víctima, es decir, si tu víctima
+hace clic en algún link y lo va a dirigir a una página que use HTTPS va a cargar
+la versión HTTPS del sitio web, para corregir esto puedes crear un script básico
+en JavaScript y luego inyectarlo en todos los sitios que nuestra víctima cargue.

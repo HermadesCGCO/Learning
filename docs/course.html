@@ -1,0 +1,243 @@
+---
+title: Creando un curso
+links:
+  - title: Creando el archivo YAML
+    url: /docs/course\#creando-el-archivo-yaml
+  - title: Datos básicos del curso
+    url: /docs/course\#datos-básicos-del-curso
+  - title: Añadiendo más información
+    url: /docs/course\#añadiendo-más-información
+  - title: Asignandole una dirección a nuestro curso
+    url: /docs/course\#asignandole-una-dirección-a-nuestro-curso
+  - title: Finalizando nuestro curso
+    url: /docs/course\#finalizando-nuestro-curso
+layout: pageSidebar
+---
+
+Lo primero que aprenderemos a hacer en Learning es un curso.
+
+Vamos a crear un curso desde cero y le agregaremos lecciones a este.
+
+### Creando el Archivo YAML
+
+Lo primero que tenemos que hacer antes de crear un curso (y casi cualquier tipo
+de contenido en Learning) es crear un archivo YAML que contendrá la
+información de este. Puedes pensar sobre este archivo como una entrada en una
+base de datos, este almacenará el nombre del curso, su descripción, sus
+lecciones, el autor, etcetera.
+
+Los archivos YAML se crean en la carpeta "_data/" y los cursos se crean una
+carpeta llamada "courses", es decir, la ruta del archivo a crear sería
+"_data/courses".
+
+Al archivo que crearás, como nombre le pondrás un slug. Un slug es un nombre
+clave (preferiblemente) relacionado con el contenido de tu curso y este nombre
+debe ser simple. Por ejemplo, el curso "Hacking Desde Cero" su archivo YAML es
+"hackingscratch".
+
+Supongamos que vas a crear un curso de el lenguaje de programación C a un nivel
+de principiantes, a este archivo le podrías llamar "cprincipiantes",
+"cbeginners", etcetera.
+
+La extensión de este archivo deberá ser "yml", así que, el nombre final del
+archivo del curso de C sería "_data/courses/cbeginners.yml".
+
+### Datos básicos del curso
+
+Lo primero que haremos una vez tengamos el archivo YAML creado en la ubicación
+correspondiente será establecer los datos de este para así empezar a crear
+contenido luego.
+
+Lo que haremos primero, será especificar el nombre del curso, una descripción
+corta que se mostrará en los lugares donde el curso aparezca y una descripción
+más extensa que será mostrada únicamente en la página del curso, esta última es
+ideal para explicar de qué es el curso, como será llevado a cabo, ventajas de
+tomarlo, etcetera.
+
+Para establecer todos esos valores tendremos que crear variables en el archivo
+YAML, para hacer esto seguiremos el siguiente formato "*nombre: valor*". Para
+establecer los valores anteriormente mencionados, tendrás que agregar las
+siguientes líneas en el archivo YAML:
+
+```
+title: C Para Principiantes
+description: Aprende C de 0 a 100 de manera fácil
+longDesc: >-
+  Aprende a utilizar el lenguaje de programación C completamente desde cero.
+
+  En este curso aprenderás a utilizar las funciones más comunes de este lenguaje
+, aprenderás como crear programas enteros usando este lenguaje de programación,
+como comunicarnos con el hardware de manera rápida, etcetera.
+```
+
+Hasta ahora es un archivo sencillo con solamente 3 valores en él.
+
+- title: Nombre del curso
+- description: Descripción corta del curso
+- longDesc: Descripción extendida del curso
+
+**Nota**: Podrás observar que cuando especifiqué el valor de
+*longDesc* usé los símbolos ">-", lo que ellos hacen es permitirnos
+establecer un valor multilínea, es decir, el valor de "longDesc" será
+lo que especifiquemos en las siguientes líneas hasta llegar hasta
+la siguiente declaración (hasta que encuentre el siguiente formato:
+"*nombre: valor*").
+
+## Añadiendo más información
+
+Ya tenemos una parte de nuestro curso creado, ya le establecimos un
+título, una descripción corta y una larga. Lo que haremos ahora será
+agregarle mucha más información a este.
+
+Si compilamos la página (ejecutando *jekyll build*) y la abrimos en
+un navegador, podremos ver que el curso no se muestra ni en la
+página principal ni en la sección explorar ni en la página de ningún
+tutor, eso no es ningún problema, lo solucionaremos luego, por ahora
+agreguemos algunos detalles más que aún hacen falta.
+
+Lo que haremos ahora será ponerle una dirección al curso, ponerle una
+imágen como miniatura, estableceremos los datos que aparecerán en la
+sección "¿Qué aprenderás al terminar este curso?" y "Requisitos" de la
+página del curso.
+
+Para ello, agregaremos los siguientes valores al final del archivo que
+creaste del curso:
+
+```
+url: /c-principiantes
+thumb: /assets/images/courses/c-principiantes.jpeg
+youlearn:
+  - Aprende a usar el lenguaje de programación C
+  - Aprende programación desde cero
+  - Aprende comunicación con hardware utilizando C
+  - Demás cosas que aprenderás con el curso
+requirements:
+  - Una computadora
+  - Un compilador de C (GNU Compiler Collection por ejemplo)
+  - Algún otro requisito
+  - Estar vivo
+```
+
+Le agregamos 4 valores al archivo YAML:
+
+- url: La dirección de la página del curso, puedes poner la dirección que
+quieras, en la siguiente sección de esta entrada aprenderemos como hacer que
+nuestro curso se muestre en esa dirección.
+
+- thumb: La dirección de la miniatura del curso, es recomendable almacenarla en
+la ruta "/assets/images/courses/" para así mantener el orden que sigue esta
+página.
+
+- youlearn: Esta es una lista (también conocida como array en otros lenguajes)
+el contenido de esta son los items que se mostrarán en la sección "¿Qué
+aprenderás al terminar este curso?". Para especificar los valores, insertas una
+nueva línea, dejas dos espacios (dependiendo del estilo que sigas pueden ser 2,
+4, 8, etcetera).
+
+- requirements: Esta también es una lista, el contenido de esta son los items
+mostrados en la sección "Requisitos" de la página del curso.
+
+### Asignandole una dirección a nuestro curso
+
+Hasta ahora, nuestro curso aún no es visible ni en la página principal de
+Learning ni en la sección "Explorar", para ver los cambios que vayamos
+haciendo le asignaremos una dirección a nuestro curso (la que estableciste
+en el punto anterior).
+
+Para hacer esto, simplemente tienes que crear un nuevo archivo en la carpeta
+"_posts/" cuyo nombre es la fecha de creación del archivo seguido por la
+dirección que especificaste en el punto anterior sin el "/" inicial. Por
+ejemplo, yo le llamé c-principiantes, así que crearé un archivo con la
+siguiente dirección:
+
+"_posts/2021-01-20-c-principiantes.html"
+
+Con eso, ya podremos acceder a "/c-principiantes" pero lo único que se nos
+mostrará es una página en blanco, lo que tenemos que hacer ahora es asignarle
+la plantilla de curso a esa página y enlazar el curso que creamos con esa
+página, para hacer esto, agregaremos lo siguiente al inicio del archivo ".html"
+que creamos en "_posts/":
+
+```
+---
+title: C Para Principiantes
+course: cbeginners
+layout: course
+---
+```
+
+Como ves, si agregamos "---" y "---" unas líneas después podremos asignar
+valores como lo hicimos anteriormente con los archivos YAML, las variables que
+estamos asignando son las siguientes:
+
+- title: El nombre del curso, simplemente pon el mismo que pusiste en el archivo
+YAML de tu curso.
+
+- course: El slug del curso que estás creando, simplemente pon el nombre del
+archivo YAML de tu curso sin la extensión ".yml".
+
+- layout: Especificamos la plantilla que usaremos en esta página, todas las
+páginas usan una plantilla, tu puedes ver las plantillas que puedes usar en
+la carpeta "_layouts/", cada uno de los archivos allí es una plantilla
+disponible para ser usada, en esta página usaremos la plantilla "course".
+
+### Finalizando nuestro curso
+
+Lo que haremos ahora será especificar los últimos datos necesarios para poder
+hacer que nuestro curso sea público y esté listo para que las personas puedan
+visitarlo.
+
+Antes que nada agregaremos la siguiente variable al final de nuestro archivo
+YAML:
+
+```
+contents:
+```
+
+Esta variable es la que almacena las lecciones del curso, en la siguiente
+entrada aprenderás como crear lecciones y ponérselas a un curso.
+
+Lo que haremos ahora, será agregar las últimas variables necesarias:
+
+```
+lastUpdated: 01/2021
+featured: 1
+tutor: hermades
+duration: 27
+category: Programación
+level: Beginner
+
+completed: 1
+```
+
+Las variables que estamos usando ahora son las siguientes:
+
+- lastUpdated: El valor de esta variable es mostrado en la página del curso,
+esta muestra la última vez que el curso fue actualizado, es recomendable
+mantenerla actualizada.
+
+- featured: Esta variable determina si el curso es mostrado o no en la
+página principal, si quieres que así sea, ponle como valor "1" si no, ponle
+como valor "0".
+
+- tutor: A esta variable le corresponde el slug del tutor que creó el curso,
+un curso solamente puede tener un tutor y aprenderemos como crear tutores
+luego.
+
+- duration: Duración del curso en horas, yo por ejemplo usé el valor "27" eso
+quiere decir que el curso dura "27" horas.
+
+- category: Categoría del curso, puedes ver las categorías disponibles en el
+archivo "_data/categories.yml". Más adelante aprenderás a crear tus propias
+categorías.
+
+- level: Nivel del curso, si es para principiantes, usuarios intermedios
+o avanzados, los valores que puede recibir son "Beginner", "Medium" y
+"Advanced" respectivamente.
+
+- completed: Si el valor de esta variable es "1" quiere decir que el curso
+ya está finalizado, es decir, ya todas sus lecciones están terminadas y no
+quedan contenidos pendientes por el tutor por crear. Si por el contrario,
+aún estás trabajando en el curso, utiliza la variable "working: 1" y si
+aún no has empezado a trabajar en el curso, pero lo tienes allí como
+pendiente puedes usar la variable "pendent: 1".

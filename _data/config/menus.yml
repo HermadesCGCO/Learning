@@ -1,0 +1,30 @@
+#- title:
+#  icon: uil-play-circle
+#  children:
+#    - title: Hacking
+#      icon: uil-window
+#      url: #
+#    - title: Linux
+#      icon: icon-brand-linux
+#      url: #
+#    - title: Programación
+#      icon: uil-processor
+#      url: #
+#    - title: Desarrollo Web
+#      icon: uil-brush-alt
+#      url: #
+- title: Explorar
+  icon: uil-book-alt
+  url: /explore
+- title: Blog
+  icon: uil-file-alt
+  url: /blog
+- title: Paths
+  icon: uil-rss-interface
+  url: /paths
+- title: Contribuir
+  icon: icon-material-outline-person-pin
+  url: /contribute
+- title: Documentación
+  icon: icon-line-awesome-question
+  url: /docs

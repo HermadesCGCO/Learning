@@ -1,0 +1,12 @@
+- name: Hacking
+  slug: hacking
+  icon: uil-window
+- name: Linux
+  slug: linux
+  icon: icon-brand-linux
+- name: Programación
+  slug: programacion
+  icon: uil-processor
+- name: Desarrollo Web
+  slug: desarrollo-web
+  icon: uil-brush-alt

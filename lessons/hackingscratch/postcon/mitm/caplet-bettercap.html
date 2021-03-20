@@ -1,0 +1,102 @@
+---
+title: EXCLUSIVO - Creando nuestra propia caplet para BetterCAP
+course: hackingscratch
+section: "Hackeo de redes - Man In The Middle"
+nofooter: 1
+layout: lesson
+---
+
+En las lecciones anteriores, hemos aprendido como usar BetterCAP para descubrir
+todos los clientes conectados en nuestra misma red, ejecutar un ataque ARP
+Spoofing para interceptar todos los datos y espiar lo que hacen en el internet,
+esto lo hacemos con el fin de obtener nombres de usuarios, contraseñas y otras
+cosas que nos puedan interesar. Para poder hacer eso, debemos ejecutar
+demasiados comandos, primero que todo, debemos ejecutar `net.probe on` para
+ejecutar el módulo _net.probe_, tenemos que establecer nuestras configuraciones
+para el módulo _arp.spoof_, encenderlo y encender el módulo _net.sniffing_.
+
+Cada vez que quieras realizar un ataque ARP Spoofing y espiar tu objetivo,
+deberás realizar todos los pasos previamente mencionados, o si quieres hacer
+este proceso automático, puedes crear un caplet, que es exactamente lo que te
+quiero mostrar en esta lección.
+
+Un caplet es simplemente un archivo de texto que contiene todos los comandos
+que quieres ejecutar.
+
+Para crear un caplet, crea un archivo de texto usando el editor de tu elección,
+emacs, vim, nano, ed, etcetera, y vamos a escribir allí todos los comandos que
+queramos que nuestra caplet ejecute.
+
+La primera cosa que tenemos que ejecutar, era `net.probe on`, así que vamos a
+copiar ese comando y pegarlo en nuestro nuevo archivo de texto. Lo siguiente que
+haremos es modificar las opciones del módulo _arp.spoof_, nosotros ejecutamos
+_set arp.spoof.fullduplex true_, luego estableceremos las direcciones IP de
+nuestros objetivos, para ello ejecutamos el comando _set arp.spoof.targets
+192.168.1.7_ (ten en cuenta que cada vez que ejecutes esta caplet, deberás
+comprobar que la dirección IP de tu víctima sea la misma), luego, ejecutamos
+el módulo _arp.spoof_ ejecutando el comando _arp.spoof on_ y finalmente,
+ejecutamos el sniffer con el comando _net.sniff on_. Al final, el archivo
+de texto que creaste deberá lucir así:
+
+```bash
+net.probe on
+ set arp.spoof.fullduplex true
+ set arp.spoof.targets 192.168.1.7
+ arp.spoof on
+ net.sniff on
+```
+
+Una vez hayas terminado de copiar estos comandos, podrás guardar tu archivo
+de texto, en mi caso la guardaré en mi directorio home (/home/hermades) y
+le llamaré _arp.cap_ a este archivo.
+
+Una vez hayamos creado el archivo, todo lo que tenemos que hacer ahora es
+pasarle a BetterCAP el caplet que creamos para que así BetterCAP ejecute los
+comandos allí especificados una vez sea iniciado. Como aún no sabemos como
+hacerlo, ejecutaremos _bettercap -help_ para ver todas las opciones disponibles
+en BetterCAP.
+
+```bash
+Usage of ./bettercap:
+  -autostart string
+        Comma separated list of modules to auto start. (default "events.stream")
+  -caplet string
+        Read commands from this file and execute them in the interactive session.
+  -cpu-profile file
+        Write cpu profile file.
+  -debug
+        Print debug messages.
+  -env-file string
+        Load environment variables from this file if found, set to empty to disable environment persistence.
+  -eval string
+        Run one or more commands separated by ; in the interactive session, used to set variables via command line.
+  -gateway-override string
+        Use the provided IP address instead of the default gateway. If not specified or invalid, the default gateway will be used.
+  -iface string
+        Network interface to bind to, if empty the default interface will be auto selected.
+  -mem-profile file
+        Write memory profile to file.
+  -no-colors
+        Disable output color effects.
+  -no-history
+        Disable interactive session history file.
+  -silent
+        Suppress all logs which are not errors.
+  -version
+        Print the version and exit.
+```
+
+La opción que queremos usar es _-caplet_. Así que, ejecutaremos BetterCAP como
+lo hemos venido haciendo hasta ahora, primero que todo, ejecutaremos
+_bettercap_ seguido por la opción _-iface_ para especificar la interfaz que
+está conectada a la red objetivo, en mi caso es _enp1s0_ y ahora, agregaremos
+la opción _-caplet_ seguido por la ubicación del caplet que creamos
+anteriormente. Si tu guardaste tu archivo en tu directorio home, por ejemplo,
+el comando lucirá así:
+
+```bash
+bettercap -iface enp1s0 -caplet ~/arp.cap
+```
+
+Una vez ejecutes ese comando, los módulos y configuraciones especificadas en el
+caplet serán aplicadas automáticamente.

@@ -1,0 +1,86 @@
+{% include head.html %}
+{% include header.html %}
+
+{% assign path = site.data.paths[page.path] %}
+
+<div class="container">
+
+  <div class="mt-lg-4" uk-grid>
+    <div class="uk-width-1-4@m">
+      <img src="{{ path.thumb }}" class="rounded shadow">
+    </div>
+
+    <div class="uk-width-expand">
+      <p class="my-0 uk-text-small">Path</p>
+      <h3 class="mt-0">{{ path.title }}</h3>
+      <p>{{ path.description }}</p>
+    </div>
+
+    <div class="uk-width-1-4@m">
+      <h5>TODO</h5>
+      <p>Deberia poner algo aqui?</p>
+    </div>
+  </div>
+
+  <div class="course-path-info my-4 my-lg-5">
+    <h4 class="uk-text-bold">¿Qué aprenderás?</h4>
+    <ul>
+      {% for thing in path.youlearn %}
+      <li>{{ thing }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <ul class="course-path-level" uk-accordion>
+
+    {% for section in path.sections %}
+    <li {% if forloop.index == 1%} class="uk-open" {% endif %}>
+      <a class="uk-accordion-title" href="#">{{ section.title  }}</a>
+      <div class="uk-accordion-content">
+	<p>{{ section.description }}</p>
+
+	<div class="path-wrap">
+
+	  <div class="course-grid-slider" uk-slider="finite: true">
+
+	    <ul
+	      class="uk-slider-items uk-child-width-1-3@m uk-child-width-1-5@m
+		     uk-grid-match uk-grid">
+	      {% for content in path.contents %}
+	      {% if content.section == section.title %}
+	      {% if content.type == "course" %}
+	      <!-- TODO: Blog entries support -->
+	        {% assign item = site.data.courses[content.course] %}
+	      {% endif %}
+
+	      <li>
+		<div class="course-card">
+
+		  <div class="course-card-thumbnail">
+		    <img src="{{ item.thumb }}">
+		    <a href="{{ item.url }}" class="play-button-trigger"></a>
+		  </div>
+
+		  <div class="course-card-body">
+		    <h4>{{ item.title }}</h4>
+		    <p>{{ item.description }}</p>
+		  </div>
+
+		</div>
+	      </li>
+	      {% endif %}
+	      {% endfor %}
+	    </ul>
+
+	  </div>
+
+	</div>
+      </div>
+    </li>
+    {% endfor %}
+
+  </ul>
+
+</div>
+
+{% include footer.html %}

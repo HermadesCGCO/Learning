@@ -1,0 +1,66 @@
+---
+title: Introducción
+layout: pageSidebar
+links:
+  - title: ¿Qué es Learning?
+    url: /docs/intro\#qué-es-learning
+  - title: ¿Qué puedo hacer en Learning?
+    url: /docs/intro\#qué-puedo-hacer-en-learning
+  - title: ¿Qué lenguage necesito conocer para contribuir a Learning?
+    url: /docs/intro\#qué-lenguage-necesito-conocer-para-contribuir-a-learning
+---
+
+### ¿Qué es Learning?
+
+Learning es una plataforma LMS (Learning Management System) desarrollada
+en Jekyll.
+
+Jekyll es un generador de sitios web estáticos, es decir, genera archivo HTML a
+partir de "layouts" e "includes".
+
+Un layout es una plantilla, como su nombre lo indica, podemos usar un layout
+como plantilla para nuestras páginas, podemos crear un archivo "html" o
+"markdown" y utilizarla para imprimir el contenido de este.
+
+Tu puedes crear tus propias plantillas creando un archivo en la carpeta
+"_layouts" en la raíz del código fuente de Learning.
+
+Un include, es algo como un widget, ya que puedes crear un archivo en la
+carpeta "_includes" en la raíz del código fuente de Learning y
+luego incluir ese archivo en alguna plantilla o incluso otro include para
+así evitar escribir el mismo código varias veces.
+
+### ¿Qué puedo hacer en Learning?
+
+En el momento en que empecé a desarrollar Learning, quise que esto fuera
+lo más flexible posible, para así permitir que cualquier persona pudiera hacer
+las modificaciones que quiera, a tal punto, de crear su propia plataforma usando
+el código de Learning.
+
+La mayor parte del contenido de Learning puede ser modificado en los
+archivos de la carpeta "_data" ubicada en el directorio raíz del código de
+ Learning, en próximas entradas de la documentación hablaré más a detalle
+sobre el contenido de cada una de las carpetas.
+
+### ¿Qué lenguage necesito conocer para contribuir a Learning?
+
+Dependiendo de lo que quieras hacer en Learning puede que necesites o no
+conocer algún lenguaje de programación:
+
+* **Cursos**: Si quieres crear un curso desde cero, es decir, crear tu propio
+curso, necesitarás saber un poco de YAML para poder crearlo y moldear el
+contenido del curso a tu gusto.
+
+* **Lecciones**: Si quieres crear una lección desde cero y anexarla a un curso,
+no es necesario saber utilizar YAML pero si necesitarás crear dos líneas en el
+archivo YAML del curso en que quieres agregar la lección. Si en lugar de crear
+una lección desde cero, quieres modificar una lección ya existente, necesitarás
+usar Markdown.
+
+* **Entradas de blog**: Si quieres crear una entrada en el blog desde cero,
+necesitarás añadir tu entrada en el archivo "entries.yml", por lo tanto,
+necesitas usar YAML y también necesitarás usar Markdown para escribir el
+contenido de la entrada de tu blog.
+
+* **Paths**: Si quieres crear un path necesitas saber solamente YAML y crear un
+archivo HTML que estará vacío y solamente hará referencia al path que creaste.

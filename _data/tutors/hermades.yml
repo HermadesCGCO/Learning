@@ -1,0 +1,22 @@
+name: Hermades
+slug: hermades
+description: >-
+  Creador de {{ site.title }} y Elite Hacking. Hacker etico y programador.
+longDesc: >-
+  ¡Hola! Soy Hermades.<br><br>
+
+  Soy una persona que hace cursos gratis para internet de temas relacionados con
+  la informática.<br><br>
+
+  También creé Learning intentar reunir la mayor cantidad de
+  personas que comparten mi amor por la enseñanza y el conocimiento libre en un
+  mismo lugar, para así crecer todos juntos y colaborar para mejorar aún más
+  nuestro contenido y aprender mientras enseñamos.<br><br>
+
+  Todo el contenido creado por mi o contenidos creados para Learning son, y
+  serán libres, por lo tanto, no tendrás que pagar nunca ni un centavo para
+  acceder a este. Por lo tanto, si puedes <a href="/contribute">contribuir</a>
+  a Learning estaría supremamente agradecido.<br><br>
+pp: /assets/images/pps/hermades.png
+role: Pentester
+mail: hermadescgco@disroot.org

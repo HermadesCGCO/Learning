@@ -1,0 +1,143 @@
+title: Hacking desde cero
+description: Aprende hacking desde lo más básico hasta lo más avanzado
+longDesc: >-
+  Aprende las herramientas y métodos más utilizados por los hackers.<br><br>
+
+  Descube como funciona una red, como se comunica con los clientes conectados en
+  esta y con el internet, descubre como explotar la manera en que lo hace para
+  así obtener el control total de cualquier dispositivo con tan solo estar
+  conectado en tu misma red.<br><br>
+
+  Aprende que hacer después de obtener acceso a un dispositivo y también, como
+  puedes engañar a un humano para que ejecute un virus.<br><br>
+
+  También hablaremos sobre la manera en que funcionan los sitios web y las
+  vulnerabilidades más comunes en ellos, hablaremos por qué se dan, la manera
+  en que se solucionan y en que se explotan.<br><br>
+
+  Esta es la parte #1 de una serie de cursos de hacking creados por mi. Espero
+  le des la oportunidad a este curso o cualquiera de los cursos siguientes a
+  este.<br><br>
+url: /hacking-scratch
+thumb: /assets/images/courses/hackingscratch.jpeg
+youlearn:
+  - Aprende a usar las herramientas y métodos más comunes utilizados por hackers
+  - Aprende a hackear y a asegurar redes WiFi y cableadas
+  - Aprende a utilizar más de 40 herramientas
+  - Aprende a hackear sistemas "seguros"
+  - Aprende a utilizar un sistema operativo que use el Kernel linux
+  - Aprende a obtener información de una compañía, una persona o un dispositivo
+  - Aprende a interceptar tráfico mientras es enviado por el aire y modificarlo
+  - Aprende a crear malware indetectable para la mayoría de antivirus
+  - Aprende a descubrir y a explotar vulnerabilidades
+  - Aprende a protegerte de los ataques discutidos en este curso
+  - Aprende a crear un laboratorio de hacking
+requirements:
+  - Una computadora con 4 GB de RAM
+contents:
+  - title: Introducción
+    contents:
+      - title: Introducción
+        url: /lessons/hackingscratch/introduccion/introduccion
+      - title: ¿Qué es el hacking? ¿Para qué aprenderlo?
+        url: /lessons/hackingscratch/introduccion/que-es
+  - title: Creando un laboratorio de pruebas
+    contents:
+      - title: ¿Qué es y cómo funciona un laboratorio de pruebas?
+        url: /lessons/hackingscratch/lab/que-es
+      - title: ¿Cómo instalar Kali Linux en una máquina virtual?
+        url: /lessons/hackingscratch/lab/kali
+  - title: Introducción a Linux
+    contents:
+      - title: Introducción a la interfaz de Kali Linux
+        url: /lessons/hackingscratch/linux/interfaz
+      - title: Introducción a la terminal de Linux
+        url: /lessons/hackingscratch/linux/terminal
+  - title: Hackeo de redes
+    contents:
+      - title: Introducción
+        url: /lessons/hackingscratch/redes/introduccion
+      - title: Concepto de red
+        url: /lessons/hackingscratch/redes/concepto-red
+      - title: ¿Qué es una dirección MAC? ¿Cómo cambiarla?
+        url: /lessons/hackingscratch/redes/mac
+      - title: Modos inalámbricos
+        url: /lessons/hackingscratch/redes/monitor
+  - title: Hackeo de redes - Ataques Pre-conexión
+    contents:
+      - title: Packet Sniffing
+        url: /lessons/hackingscratch/precon/sniffing
+      - title: Bandas WiFi
+        url: /lessons/hackingscratch/precon/bands
+      - title: Ejecuta airodump en tu red objetivo
+        url: /lessons/hackingscratch/precon/target
+      - title: Ataque de desautenticación
+        url: /lessons/hackingscratch/precon/deauth
+  - title: Hackeo de redes - Obteniendo acceso
+    contents:
+      - title: Introducción
+        url: /lessons/hackingscratch/gaining/introduccion
+  - title: Hackeo de redes - Obteniendo acceso - Redes WEP
+    contents:
+      - title: Teoría de crackeo contraseñas WEP
+        url: /lessons/hackingscratch/crackwep/teoria
+      - title: Crackeo básico WEP
+        url: /lessons/hackingscratch/crackwep/basico
+      - title: Fake Auth Attack
+        url: /lessons/hackingscratch/crackwep/auth
+      - title: ARP Request Replay
+        url: /lessons/hackingscratch/crackwep/arp
+  - title: Hackeo de redes - Obteniendo acceso - Redes WPA/WPA2
+    contents:
+      - title: Introducción
+        url: /lessons/hackingscratch/crackwpa/introduccion
+      - title: Capturando el handshake
+        url: /lessons/hackingscratch/crackwpa/handshake
+      - title: Creando el wordlist
+        url: /lessons/hackingscratch/crackwpa/wordlist
+      - title: Ataque de fuerza bruta
+        url: /lessons/hackingscratch/crackwpa/bruteforce
+  - title: Hackeo de redes - Conclusión
+    contents:
+      - title: Haz tu red más segura contra hackers
+        url: /lessons/hackingscratch/conclusion/seguridad
+  - title: Hackeo de redes - Ataques post-conexión
+    contents:
+      - title: Introducción
+        url: /lessons/hackingscratch/postcon/introduccion
+      - title: Obtén todos los clientes conectados en tu red usando NetDiscover
+        url: /lessons/hackingscratch/postcon/networkmap1
+      - title: Obtén información de los dispositivos conectados en tu red
+        url: /lessons/hackingscratch/postcon/info
+  - title: Hackeo de redes - Man In The Middle
+    contents:
+      - title: ARP Spoofing - ¿Qué es? ¿Cómo funciona?
+        url: /lessons/hackingscratch/postcon/mitm/arp
+      - title: Interceptando tráfico
+        url: /lessons/hackingscratch/postcon/mitm/interceptando
+      - title: Introducción a Bettercap
+        url: /lessons/hackingscratch/postcon/mitm/bettercap
+      - title: ARP Spoofing usando BetterCAP
+        url: /lessons/hackingscratch/postcon/mitm/bettercap-arp
+      - title: Espiando el tráfico de nuestra víctima 
+        url: /lessons/hackingscratch/postcon/mitm/espiandop
+      - title: EXCLUSIVO - Creando nuestra propia caplet para BetterCAP
+        url: /lessons/hackingscratch/postcon/mitm/caplet-bettercap
+      - title: EXCLUSIVO - ¿Qué es HTTPS?
+        url: /lessons/hackingscratch/postcon/mitm/que-es-https
+      - title: EXCLUSIVO - ¿Cómo evadir HTTPS?
+        url: /lessons/hackingscratch/postcon/mitm/evadir-https
+      - title: EXCLUSIVO - ¿Cómo evadir HSTS?
+        url: /lessons/hackingscratch/postcon/mitm/evadir-hsts
+      - title: DNS Spoofing
+        url: /lessons/hackingscratch/postcon/mitm/dns-spoofing
+lastUpdated: 03/2021
+featured: 1
+tutor: hermades
+duration: 12
+category: Hacking
+level: Beginner
+
+completed: 0 # Determines wether a course is completed or not
+working: 1 # Determines wether a course is incomplete but being updated
+pendent: 0 # Determines wether a course hasn't started yet and is a placeholder

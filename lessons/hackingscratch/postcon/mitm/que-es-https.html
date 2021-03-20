@@ -1,0 +1,84 @@
+---
+title: EXCLUSIVO - ¿Qué es HTTPS?
+course: hackingscratch
+section: "Hackeo de redes - Man In The Middle"
+nofooter: 1
+layout: lesson
+---
+
+Todo lo que hemos hecho hasta el momento, funcionará solamente contra páginas
+HTTP. La razón porqué nuestros ataques solo funcionan contra HTTP es porque
+los datos enviados por conexiones HTTP son enviados como texto plano, es decir,
+es texto que humanos como nosotros pueden leer y entender. Es por eso que
+cuando somos el hombre del medio, podemos leer este texto y si quisieramos,
+podríamos modificarlo. Eso es obviamente un problema y fue solucionado en HTTPS.
+
+Como sabrás, la mayoría de los sitios web usan HTTPS, el porqué, es que como
+dije antes es una versión más segura de HTTPS, la manera que funciona, es
+agregando una capa extra sobre HTTP que de ahí es donde la "_s_" sale.
+
+HTTPS es un protocolo HTTP más seguro y la capa extra encriptará el texto
+que HTTPS envía. Si una persona encuentra la manera de ser el hombre del medio
+ellos podrán leer estos datos, pero solo podrán leer carácteres basura, los
+datos no serán útiles para la persone que intercepte la conexión.
+
+HTTPS usa TLS o SSL para encriptar los datos y este protocolo es muy complicado
+de vulnerar, es por ello que el método más sencillo para hacerlo es convertir
+las peticiones HTTPS en HTTP. Ya que somos el hombre del medio, podemos
+comprobar si una persona está realizando peticiones a un sitio HTTPS, y en lugar
+de responderles con la versión HTTPS del sitio le daremos la versión HTTP, de
+esta forma los datos se enviarán en texto plano y podremos leerlos de la forma
+en que lo hicimos anteriormente.
+
+Para convertir peticiones HTTPS en HTTP tendremos que configurar manualmente una
+herramienta llamada SSLStrip y hacer uso de esta. Este es un tema un poco más
+avanzado y será cubierto en las siguientes partes de este curso, por ahora,
+haremos uso de una caplet de BetterCAP que te permitirá hacer esto, el único
+problema es que esta caplet no replace todos los links HTTPS a HTTP en las
+páginas cargadas.
+
+Para descargar todas las caplets de BetterCAP, tendrás que clonar un repositorio
+git y ejecutar unos cuántos comandos, para hacer esto, primero comprueba que
+tengas git instalado, si no lo tienes instalado, puedes ejecutar el siguiente
+comando para instalarlo:
+
+```bash
+sudo apt install git
+```
+
+Luego, ejecuta el siguiente comando para clonar/descargar el repositorio de
+caplets de BetterCAP:
+
+```bash
+git clone https://wwww.github.com/bettercap/caplets.git
+```
+
+Una vez hayas descargado el repositorio de caplets, ahora debemos navegar a este
+directorio e instalarlas:
+
+```bash
+cd caplets
+ sudo make install
+```
+
+Una vez hayas instalado las caplets de BetterCAP, tendremos una última cosa por
+hacer y es actualizar la caplet que creamos en la lección anterior, simplemente
+abre ese archivo (recuerda que la llamamos _arp.cap_) y agregar la siguiente
+línea antes de _net.sniff.on_:
+
+```bash
+set net.sniff.local true
+```
+
+Lo que esta opción hará, es decirle a BetterCAP que espíe todos los datos que
+sean enviados, incluso si cree que son locales, es decir, tráfico generado por
+nuestro dispositivo, el que está realizando el ataque. La razón porqué
+necesitamos hacer uso de esta opción, es porque una vez que usemos la caplet
+para evadir la seguridad HTTPS, los datos serán enviado como si fueran
+enviados desde nuestro computador, así que BetterCAP creerá que todas las
+peticiones nos pertenecen a nosotros y no nos las mostrará.
+
+Una vez hayamos descargado e instalado todas las caplets, hayamos actualizado
+nuestro script, estamos listos para usar la caplet que hará el trabajo de
+convertir peticiones HTTPS en HTTP por nosotros, eso lo veremos en la próxima
+lección.

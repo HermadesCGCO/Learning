@@ -1,0 +1,38 @@
+title: Hacking de 0 a 100
+icon: icon-brand-black-tie
+thumb: /assets/images/courses/hackingscratch.jpeg
+description: >-
+  Serie de cursos creados por Hermades que llevarán tus habilidades de cyberseguridad
+  de cero a cien.
+url: /path/hacking-0-a-100
+youlearn:
+  - Hacking completamente desde cero
+  - Utilizar las herramientas más comunes
+  - Crear malware indetectable
+  - Obtener control total sobre tu víctima
+  - Aprende de manera práctica
+  - Realizar ataques de manera anónima
+sections:
+  - title: Introducción
+    description: >-
+      Lo más básico relacionado con el hacking, para realizar los
+      cursos presentados en esta sección no hace falta ningún conocimiento
+      previo relacionado con hacking e incluso con Linux.
+  - title: Un paso más allá
+    description: >-
+      Una continuación a todo lo que has visto anteriormente, aprende a hacer
+      cosas mucho más avanzadas y obtén muchas más habilidades.
+  - title: Avanzado
+    description: >-
+      Para realizar los contenidos en esta sección necesitarás un conocimiento
+      avanzado de hacking, este nivel lo podrás lograr realizando los cursos
+      en las secciones anteriores
+  - title: Auxiliar
+    description: >-
+      Estas son entradas de blog o shows que podrían ayudarte a mejorar tus
+      habilidades como hacker y ayudar a cumplir con los retos (si hay alguno)
+      de los cursos anteriores.
+contents:
+  - section: Introducción
+    type: course
+    course: hackingscratch

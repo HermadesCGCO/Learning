@@ -1,0 +1,145 @@
+{% include head.html %}
+{% include header.html %}
+
+{% assign tutor = site.data.tutors[page.tutor] %}
+
+<div class="bg-grey uk-light">
+
+  <div class="container">
+    <div class="p-3">
+      <h1>{{ tutor.name }}</h1>
+      <p>Explora el contenido creado por {{ tutor.name }}.</p>
+    </div>
+
+    <nav class="responsive-tab style-4">
+      <ul data-submenu-title="Posts"
+	  uk-switcher="connect: #posts-nav; animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
+	<li><a href="#">Cursos</a></li>
+	<li><a href="#">Entradas en el blog</a></li>
+	<li><a href="#">Acerca De</a></li>
+      </ul>
+    </nav>
+  </div>
+
+</div>
+
+<div class="container bg-white">
+
+  <ul class="uk-switcher pl-lg-3" id="posts-nav">
+
+    <!-- Courses -->
+    <li>
+      <div class="mt-4">
+	<h2>Cursos</h2>
+	<p class="mb-4">Mira todos los cursos creados por {{ tutor.name }}.
+	  Esto incluye los cursos pendientes, en desarrollo y completados.</p>
+
+	<ul class="uk-child-width-1-4@m uk-child-width-1-3@s
+		    uk-grid">
+	  {% for courses in site.data.courses %}
+	  {% for course in courses %}
+
+	  {% if course.title != nil and course.tutor == page.tutor %}
+	  <li>
+	    <a href="{{ course.url }}">
+	      <div class="course-card episode-card animate-this">
+
+		<div class="course-card-thumbnail">
+		  <img src="{{ course.thumb }}">
+		  <span class="play-button-trigger"></span>
+		</div>
+
+		<div class="course-card-body">
+		  <div class="course-card-info">
+		    <div>
+		      <span class="catagroy">{{ course.category }}</span>
+		    </div>
+		  </div>
+		  <h4>{{ course.title }}</h4>
+		  <p>{{ course.description }}</p>
+
+		  <div class="course-card-footer">
+
+		    {% if course.completed == 1 %}
+		    <p class="uk-text-success">Finalizado</p>
+		    {% endif %}
+		    {% if course.working == 1 %}
+		    <p class="uk-text-warning">En desarrollo</p>
+		    {% endif %}
+		    {% if course.pendent == 1 %}
+		    <p style="color: #ff0a0a;">Pendiente</p>
+		    {% endif %}
+
+		    <h5><i class="icon-feather-clock"></i> {{course.duration}}
+		      horas</h5>
+
+		  </div>
+		</div>
+
+	      </div>
+	    </a>
+	  </li>
+	  {% endif %}
+
+	  {% endfor %}
+	  {% endfor %}
+	</ul>
+
+      </div>
+    </li>
+    <!-- End courses -->
+
+    <!-- Blog posts -->
+    <li>
+      <div class="mt-4">
+	<h2>Entradas de Blog</h2>
+	<p class="mb-4">Todas las entradas de blog creadas por
+	  {{ tutor.name }}</p>
+
+	<ul class="uk-child-width-1-4@m uk-child-width-1-3@s
+		   uk-grid">
+	  {% for entry in site.data.blog.entries %}
+	  {% if entry.tutor == tutor.slug %}
+
+	  <li>
+	    <a href="{{ entry.url }}">
+	      <div class="course-card episode-card animate-this">
+
+		<div class="course-card-thumbnail">
+		  <img src="{{ entry.thumb }}">
+		</div>
+
+		<div class="course-card-body">
+		  <div class="course-card-info">
+		    <div>
+		      <span class="catagroy">{{ entry.category }}</span>
+		    </div>
+		  </div>
+
+		  <h4>{{ entry.title }}</h4>
+		  <p>{{ entry.description }}</p>
+		</div>
+
+	      </div>
+	    </a>
+	  </li>
+
+	  {% endif %}
+	  {% endfor %}
+	</ul>
+      </div>
+    </li>
+    <!-- End blog posts -->
+
+    <!-- About -->
+    <li>
+      <h2 class="pt-4 mb-4">Acerca de {{ tutor.name }}</h2>
+      {{ tutor.longDesc | markdownify }}
+    </li>
+    <!-- End about -->
+
+  </ul>
+
+</div>
+
+{% include footer.html %}

@@ -1,0 +1,71 @@
+<header class="header" uk-sticky="top: 20;
+	      cls-active: header-sticky;">
+
+  <div class="container">
+    <nav uk-navbar>
+
+      <div class="uk-navbar-left">
+
+	<span class="btn-mobile" uk-toggle="target: #wrapper;
+		    cls:mobile-active"></span>
+
+	<a href="/" class="logo">
+	  <img src="/assets/images/logo-dark.svg">
+	  <span>{{ site.title }}</span>
+	</a>
+
+      </div>
+
+    </nav>
+  </div>
+
+</header>
+
+<div class="side-nav uk-animation-slide-left-medium">
+
+  <div class="side-nav-bg"></div>
+
+  <div class="logo uk-visible@s">
+    <a href="/">
+      <i class="uil-graduation-hat"></i>
+    </a>
+  </div>
+
+  <ul>
+    {% for menu in site.data.config.menus %}
+    <li>
+      <a {% if menu.url %}href="{{ menu.url }}"{% endif %}>
+	<i class="{{ menu.icon }}"></i>
+
+	{% if menu.title != nil %}
+	<span class="tooltips">{{ menu.title }}</span>
+	{% endif %}
+
+      </a>
+
+      {% if menu.children != nil %}
+      <div class="side-menu-slide">
+	<div class="side-menu-slide-content">
+	  <ul data-simplebar>
+
+	    {% for children in menu.children %}
+	    <li>
+	      <a href="{{ children.url }}">
+		<i class="{{ children.icon }}"></i>
+		{{ children.title }}
+	      </a>
+	    </li>
+	    {% endfor %}
+
+	  </ul>
+	</div>
+      </div>
+      {% endif %}
+
+    </li>
+    {% endfor %}
+  </ul>
+
+</div>
+
+<div class="page-content">

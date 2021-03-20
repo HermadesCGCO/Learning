@@ -1,0 +1,151 @@
+---
+title: Añadiendo secciones y lecciones
+links:
+  - title: Definición
+    url: /docs/lessons\#definición
+  - title: Creando nuestra primer sección
+    url: /docs/lessons\#creando-nuestra-primer-sección
+  - title: Creando nuestra primer lección
+    url: /docs/lessons\#creando-nuestra-primer-lección
+layout: pageSidebar
+---
+
+### Definición
+
+Una sección es un contenedor en un curso diseñado para separar las lecciones
+por categorías, niveles o simplemente para mantener un orden.
+
+En esta entrada aprenderemos a crear tanto secciones como lecciones.
+
+### Creando nuestra primer sección
+
+Lo que tenemos que crear antes de añadir lecciones es una sección, como se
+mencionó anteriormente, una sección es un contenedor de lecciones, el contenido
+de una es ilimitado, es decir, puedes agregar las lecciones que quieras, no
+hay un límite.
+
+Para crear una sección tendremos que modificar el archivo YAML del curso en el
+que queremos agregar la sección, yo seguiré usando el ejemplo de un curso de C
+que creamos en la entrada anterior.
+
+Recuerda que en la entrada anterior creamos un archivo YAML en la ruta
+"_data/courses/cbeginners.yml" y a este archivo le agregamos una variable
+"_contents_" que aún no tiene contenido. El valor de "_contents_" es una lista,
+la lista de las secciones del curso.
+
+Voy a crear varias secciones en este curso. El valor de _contents_ luciría así:
+
+```
+contents:
+  - title: Introducción
+    contents:
+  - title: Operadores
+    contents:
+  - title: Otra sección
+    contents:
+  - title: Secciones de relleno
+    contents:
+```
+
+He creado 4 secciones en el curso de C:
+
+1. Introducción
+2. Operadores
+3. Otra sección
+4. Secciones de relleno
+
+**Nota**: Ten en cuenta la indentación en cada uno de los valores que estamos
+creando, si no los agregas en tu archivo pueden haber errores de compilación
+o las secciones no serán creadas.
+
+Puedes agregar las secciones que quieras en un curso, no hay límite para ello.
+
+## Creando nuestra primer lección
+
+Al principio, crear una lección podría parecer un poco más complicado, ya que
+hay que hacer más cosas que las que hicimos al momento de crear nuestra
+sección, pero en realidad, es demasiado sencillo.
+
+Lo primero que tendremos que hacer, es agregar la lección a la sección que
+querramos, ¿viste que cada una de las secciones tiene una variable _contents_
+también? allí se ubican las lecciones, el valor de esta es también una lista
+pero sus contenidos son un poco distintos, agreguemos unas lecciones en la
+primera sección.
+
+```
+contents:
+  - title: Introducción
+    contents:
+      - title: Introducción a C
+        url: /lessons/cbeginners/introduccion/introduccion-c
+      - title: ¿Por qué aprender C?
+        url: /lessons/cbeginners/introduccion/por-que-c
+      - title: ¿Qué es un compilador?
+        url: /lessons/cbeginners/introduccion/que-es-un-compilador
+```
+
+**Nota**: De nuevo, ten en cuenta la indentación ya que eso es un factor muy
+importante en las listas.
+
+Ahora, la sección de nuestro curso de C tiene 3 lecciones:
+
+1. Introducción a C
+2. ¿Por qué aprender C?
+3. ¿Qué es un compilador?
+
+Cada una de las lecciones toma los siguientes valores:
+
+- **title**: Nombre de la lección.
+- **url**: Dirección de la lección, cuando el usuario haga clic en esta lección
+sin importar si está en el menú o en la página del curso será dirigido a esta
+dirección.
+
+Ahora, antes de crear nuestras lecciones tendremos que crear una nueva carpeta
+siguiendo el formato que especificamos en la "url" de las lecciones. Crearemos
+una carpeta en "lessons/" cuyo nombre es el slug de nuestro curso (el nombre del
+archivo YAML sin la extensión). Mi carpeta quedaría en la siguiente ruta
+"_lessons/cbeginners/_". Luego, yo recomendaría que por cada una de las
+secciones crees una carpeta allí con su nombre y dentro de esa carpeta estarían
+las lecciones de esa sección, por ejemplo, si tienes una sección llamada
+"Condicionales y Bucles" crearías una carpeta
+"_lessons/cbeginners/condicionales-bucles/_".
+
+Una vez tengas la carpeta de tu curso y la carpeta de tu sección crearemos
+un archivo HTML que almacenará el contenido de la lección. También te recomiendo
+ponerle como nombre algo relacionado con la lección, por ejemplo, si tienes
+una lección llamada "Bucles if" puedes llamar este archivo "ifs.html" por
+ejemplo.
+
+¿Recuerdas cuando en la entrada anterior asignamos variables YAML en un archivo
+HTML? Para las lecciones también tendremos que hacer eso, ¿recuerdas como
+hacerlo?
+
+Debes agregar "_---_" al inicio del archivo y poner las variables allí, una
+lección debe tener las siguientes variables:
+
+* title: Nombre de la lección, **NOTA** el nombre que pongas aquí debe ser
+el mismo que le pusiste a la lección en el archivo YAML.
+* course: Slug del curso al que esta lección hace parte, por ejemplo, si
+fuesemos a agregar esta lección al curso de C que estamos creando, aquí
+pondríamos "_cbeginners_".
+* section: Sección a la que esta lección pertenece, **NOTA** el nombre que
+pongas aquí debe ser el mismo de la sección.
+* video: URL al video de la lección. **Nota**: Si no especificas un video,
+el contenido de la lección será texto, es decir, el contenido del archivo
+HTML.
+* layout: Plantilla que usaremos para esta página, para las lecciones es
+"_lesson_".
+* nofooter: Usar este valor oculta el footer en cualquier página (no solamente
+en lecciones).
+
+El archivo HTML de la lección "Introducción" de la sección homónima del
+curso de C que estamos creando luciría así:
+
+```
+title: Introducción a C
+course: cbeginners
+section: "Introducción"
+video: https://www.peertube.stream/embed/unvideo
+layout: lesson
+nofooter: 1
+```

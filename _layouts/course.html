@@ -1,0 +1,139 @@
+{% assign course = site.data.courses[page.course] %}
+{% assign tutor = site.data.tutors[course.tutor] %}
+
+{% include head.html %}
+{% include header.html %}
+
+<div class="page-content">
+
+  <div class="course-details-wrapper topic-1 uk-light pt-5">
+    <div class="container p-sm-0">
+
+      <div uk-grid>
+	<div class="uk-width-2-3@m">
+
+	  <div class="course-details">
+	    <h1>{{ course.title }}</h1>
+	    <p>{{ course.description }}</p>
+
+	    <div class="course-details-info">
+	      <ul>
+		<li>Creado por
+		  <a href="/tutor/{{ course.tutor }}">{{ tutor.name }}</a>
+		</li>
+		<li>Última actualización: {{ course.lastUpdated }}</li>
+	      </ul>
+	    </div>
+	  </div>
+
+	  <nav class="responsive-tab style-5">
+	    <ul
+	      uk-switcher="connect: #course-intro-tab; animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
+	      <li><a href="#">Descripción</a></li>
+	      <li><a href="#">Contenido</a></li>
+	    </ul>
+	  </nav>
+
+	</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="uk-grid-large mt-4" uk-grid>
+      <div class="uk-width-2-3@m">
+
+	<ul id="course-intro-tab" class="uk-switcher mt-4">
+
+	  <li class="course-description-content">
+	    <h4>Descripción</h4>
+
+	    {{ course.longDesc | markdownify }}
+
+	    <h4>¿Qué aprenderás al terminar este curso?</h4>
+	    <div class="uk-child-width-1-2@s" uk-grid>
+	      <div>
+		<ul class="list-2">
+	      {% for thing in course.youlearn %}
+	      {% assign half = forloop.length | divided_by: 2 | plus: 1 %}
+	      {% if forloop.index == half %}
+	        </ul>
+	      </div>
+	      <div>
+		<ul class="list-2">
+	      {% endif %}
+	      <li>{{ thing }}</li>
+	      {% endfor %}
+	        </ul>
+	      </div>
+	    </div>
+
+	    <h4>Requisitos</h4>
+	    <ul class="list-1">
+	      {% for requirement in course.requirements %}
+	      <li>{{ requirement }}</li>
+	      {% endfor %}
+	    </ul>
+	  </li>
+
+	  <li>
+	    <ul class="course-curriculum" uk-accordion="multiple: true">
+
+	      {% for section in course.contents %}
+	      <li>
+		<a class="uk-accordion-title" href="#">
+		  {{ section.title }}
+		</a>
+
+		<div class="uk-accordion-content">
+		  <ul class="course-curriculum-list">
+		    {% for lesson in section.contents %}
+		    <li><a href="{{ lesson.url }}">{{ lesson.title }}</a></li>
+		    {% endfor %}
+		  </ul>
+		</div>
+	      </li>
+	      {% endfor %}
+
+	    </ul>
+	  </li>
+
+	</ul>
+
+      </div>
+
+      <div class="uk-width-1-3@m">
+	<div class="course-card-trailer" uk-sticky="top: 10; offset: 95;">
+
+	  <div class="course-thumbnail">
+	    <img src="{{ course.thumb }}">
+	  </div>
+
+	  <div class="p-3">
+	    <p class="uk-text-bold">Este curso incluye</p>
+
+	    <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
+	      <div>
+		<span><i class="uil-youtube-alt"></i>
+		  {{ course.duration }} horas</span>
+	      </div>
+	      <div>
+		{% assign lessons = 0 %}
+		{% for section in course.contents %}
+		{% for lesson in section.contents %}
+		{% assign lessons = lessons | plus: 1 %}
+		{% endfor %}
+		{% endfor %}
+		<span><i class="uil-clock-five"></i> {{ lessons }}
+		  lecciones</span>
+	      </div>
+	    </div>
+	  </div>
+
+	</div>
+      </div>
+    </div>
+  </div>
+
+{% include footer.html %}

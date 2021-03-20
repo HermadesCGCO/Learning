@@ -1,0 +1,130 @@
+{% include head.html %}
+{% include header.html %}
+
+{% include home-hero.html%}
+
+<div class="container">
+  <div class="section-small">
+
+    <div uk-slider="finite: true" class="course-grid-slider">
+      <div class="grid-slider-header">
+	<div>
+	  <h4>Cursos destacados</h4>
+	</div>
+	<div class="grid-slider-header-link">
+	  <a href="#" class="slide-nav-prev" uk-slider-item="previous"></a>
+	  <a href="#" class="slide-nav-next" uk-slider-item="next"></a>
+	</div>
+      </div>
+
+      <ul class="uk-slider-items uk-child-width-1-4@m uk-child-width-1-3@s
+		 uk-grid">
+
+	{% for courses in site.data.courses %}
+	{% for course in courses %}
+	{% if course.title != nil and course.featured == 1 and course.pendent == 0 %}
+	<li>
+	  <a href="{{ course.url }}">
+	    <div class="course-card episode-card animate-this">
+	      <div class="course-card-thumbnail">
+		<img src="{{ course.thumb }}">
+		<span class="play-button-trigger"></span>
+	      </div>
+	      <div class="course-card-body">
+		<div class="course-card-info">
+		  <div>
+		    <span class="catagroy">{{ course.category }}</span>
+		  </div>
+		</div>
+		<h4>{{ course.title }}</h4>
+		<p>{{ course.description }}</p>
+		<div class="course-card-footer">
+		  {% assign lessons = 0 %}
+
+		  {% for section in course.contents %}
+		  {% for lesson in section.contents %}
+		  {% assign lessons = lessons | plus: 1 %}
+		  {% endfor %}
+		  {% endfor %}
+
+		  <h5><i class="icon-feather-film"></i> {{ lessons }}
+		    lecciones</h5>
+		  <h5><i class="icon-feather-clock"></i> {{ course.duration }}
+		  horas</h5>
+		</div>
+	      </div>
+	    </div>
+	  </a>
+	</li>
+	{% endif %}
+	{% endfor %}
+	{% endfor %}
+
+      </ul>
+
+    </div>
+
+    {% for curCategory in site.data.categories %}
+    <div class="section-small pt-0">
+
+      <div class="course-grid-slider" uk-slider="finite: true">
+	<div class="grid-slider-header">
+	  <div>
+	    <h4>{{ curCategory.name }}</h4>
+	  </div>
+	  <div class="grid-slider-header-link">
+	    <a href="#" class="slide-nav-prev" uk-slider-item="previous"></a>
+	    <a href="#" class="slide-nav-next" uk-slider-item="next"></a>
+	  </div>
+	</div>
+
+	<ul class="uk-slider-items uk-child-width-1-4@m uk-child-width-1-3@s
+		   uk-grid">
+	  {% for courses in site.data.courses %}
+	  {% for course in courses %}
+	  {% if course.category == curCategory.name and course.pendent == 0 %}
+	  <li>
+	    <a href="{{ course.url}}">
+	      <div class="course-card">
+		<div class="course-card-thumbnail">
+		  <img src="{{ course.thumb }}">
+		  <span class="play-button-trigger"></span>
+		</div>
+		<div class="course-card-body">
+		  <div class="course-card-info">
+		    <div>
+		      <span class="catagroy">{{ course.category }}</span>
+		    </div>
+		  </div>
+		  <h4>{{ course.title }}</h4>
+		  <p>{{ course.description }}</p>
+		  <div class="course-card-footer">
+		    {% assign lessons = 0 %}
+
+		    {% for section in course.contents %}
+		    {% for lesson in section.contents %}
+		    {% assign lessons = lessons | plus: 1 %}
+		    {% endfor %}
+		    {% endfor%}
+
+		    <h5><i class="icon-feather-film"></i> {{ lessons }}
+		      lecciones</h5>
+		    <h5><i class="icon-feather-clock"></i> {{ course.duration}}
+		      Horas</h5>
+		  </div>
+		</div>
+	      </div>
+	    </a>
+	  </li>
+	  {% endif %}
+	  {% endfor %}
+	  {% endfor%}
+	</ul>
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+
+{% include footer.html %}

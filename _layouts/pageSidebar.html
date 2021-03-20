@@ -1,0 +1,38 @@
+{% include head.html %}
+{% include header.html %}
+
+<div class="page-content-inner">
+
+  <h2>{{ page.title}}</h2>
+
+  <div uk-grid>
+    <div class="uk-width-1-4@m uk-flex-last@m">
+
+      <nav class="responsive-tab style-3"
+	   uk-sticky="top: 100; offset: 80; media: @m; bottom: true;">
+	<ul>
+	  {% for link in page.links %}
+	  <li class="pb-2">
+	    <a href="{{ link.url }}">{{ link.title }}</a>
+	  </li>
+	  {% endfor %}
+	</ul>
+      </nav>
+
+    </div>
+
+    <div class="uk-width-expand@m mt-0">
+      <div class="my-4">
+	<h4>{{ page.title }}</h4>
+	<hr class="m-0">
+      </div>
+
+      <article class="uk-article">
+	{{ page.content | markdownify }}
+      </article>
+    </div>
+  </div>
+
+</div>
+
+{% include footer.html %}

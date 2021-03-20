@@ -1,0 +1,20 @@
+title: Learning
+description: >-
+  Aprende hacking y programación de una manera completamente gratuita
+author: Hermades
+language: es
+permalink: /:title/
+
+# Personalisation configs
+heroText: >-
+  Aprende completamente gratis
+heroSmallText: >-
+  Aprende hacking, programación y mucho más...
+heroButtonLink: /explore
+heroButtonText: Explorar
+
+# Author configs
+#twitter:
+#dribbble:
+#facebook:
+youtube: https://www.youtube.com/channel/UCWZn29xFL-cESDBZfgsFwPA/

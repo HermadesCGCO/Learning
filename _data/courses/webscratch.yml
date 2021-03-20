@@ -1,0 +1,49 @@
+title: Desarrollo Web desde Cero
+description: Aprende todas las técnicas modernas de desarrollo web
+longDesc: >-
+  Aprende a crear los mejores sitios web sin ningún conocimiento previo
+  requerido.<br><br>
+
+  Aprende a usar los lenguajes de programación y tecnologías más utilizados
+  para el desarrollo de aplicaciones web dinámicas, seguras y completas.
+  Aprende a crear tus propios diseños para tus páginas, administrar y
+  actualizar bases de datos y muchísimas cosas más.
+url: /webscratch
+thumb: /assets/images/courses/webscratch.jpg
+youlearn:
+  - Crear sitios web desde cero, sin experiencia previa
+  - Utilizar el lenguaje de scripting HTML
+  - Crear tus propios diseños usando CSS
+  - Flexbox
+  - JavaScript desde cero
+  - JavaScript ASYNC
+  - AJAX y APIs
+  - Agregar un poco de dinamismo usando vanilla JavaScript
+  - Node.js completamente desde cero
+  - Crear plantillas dinámicas usando HTML y Node
+  - MongoDB
+  - ExpressJS
+  - Manejar errores y excepciones en Express
+requirements:
+  - Una computadora con mínimo 4 GB de RAM
+contents:
+
+  - title: Introducción
+    contents:
+      - title: Introducción
+        url: /lessons/webscratch/intro/intro
+  - title: Introducción al Desarrollo Web
+    contents:
+    - title: ¿Cómo funciona el internet?
+      url: /lessons/webscratch/intro-web/internet
+  
+lastUpdated: 03/2021
+featured: 1
+tutor: hermades
+duration: 30
+category: Desarrollo Web
+level: Beginner
+
+completed: 0
+working: 1
+pendent: 0

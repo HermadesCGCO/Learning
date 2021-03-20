@@ -1,0 +1,113 @@
+---
+title: EXCLUSIVO - ¿Cómo evadir HSTS?
+course: hackingscratch
+section: "Hackeo de redes - Man In The Middle"
+nofooter: 1
+layout: lesson
+---
+
+En la lección anterior, aprendimos como convertir peticiones HTTPS a HTTP y esto
+nos permite ver todo lo que un usuario hace en estos sitios web, porque los
+datos en HTTP es enviado en texto plano, por lo tanto, podremos ver los nombres
+de usuario, contraseñas, las URLS que visite y básicamente todo lo que hacen
+en páginas HTTPS.
+
+Al final de la lección anterior, mencioné que este método no funcionará en
+sitios web como Facebook, Twitter y otros que utilicen HSTS.
+
+La razón porqué no funcionará contra estos sitios, es porque los navegadores
+modernos cuentan con una lista de sitios web que solo cargarán sobre HTTPS. Lo
+que hicimos en la lección anterior, es que cuando un navegador pedía un sitio
+web, cargabamos el sitio web aunque usara HTTPS, pero siempre le devolvíamos la
+versión HTTP. En HSTS, el navegador sabe que este sitio web, por ejemplo,
+_facebook.com_ debe ser **SIEMPRE** cargado sobre HTTPS. Entonces, incluso antes
+de enviarnos la petición, ya lo estará haciendo por medio del protocolo HTTPS y
+solo aceptará respuestas si estas son enviadas en HTTPS también. No hay nada que
+podamos hacer realmente una vez nos volvamos el hombre del medio, porque el
+navegador está haciendo esta comprobación de manera local, está mirando si el
+sitio web que pidió el usuario está en una lista que está almacenado en el
+computador de la víctima, por lo tanto, la única solución práctica hasta el
+momento para evadir la seguridad HSTS es hacer que el navegador piense que
+está cargando otro sitio web, para hacer esto, vamos a reemplazar todos los
+links HSTS en las páginas cargadas a links similares, por ejemplo:
+
+- Podemos reemplazar _facebook.com_ con _facebook.**corn**_. Luce bastante
+sospechoso, pero cuando esta dirección está en la barra de URLs, la _RN_ al
+final lucirá bastante similar a la letra _M_.
+- Puedes reemplazar _twitter.com_ con _**twiter**.com_, pero haciendo uso de
+una sola _T_ en lugar de _TT_.
+
+Sé que parece un poco confuso, pero cuando lo llevemos a la práctica se volverá
+un poco más sencillo.
+
+Vamos a hacer uso de la caplet _hstshijack_ de nuevo, la que usamos en la
+lección anterior, pero ahora vamos a hacer unas cuántas modificaciones.
+
+Para modificar la caplet _hstshijack_, debemos abrir el archivo .cap en su
+ubicación (/usr/local/share/bettercap/caplets/hstshijack/hstshijack.cap) con
+el editor de texto de tu elección, deberás ver un archivo similar al siguiente:
+
+```bash
+# Documentation can be found at https://github.com/bettercap/caplets/tree/master/hstshijack
+
+ # Domains assigned to 'hstshijack.targets', 'hstshijack.blockscripts' and 'hstshijack.payloads'
+ # variables get precendence over those assigned to the 'hstshijack.ignore' variable.
+ set hstshijack.targets         *.google.com, google.com, gstatic.com, *.gstatic.com
+ set hstshijack.replacements    *.google.corn,google.corn,gstatic.corn,*.gstatic.corn
+ set hstshijack.ssl.domains     /usr/local/share/bettercap/caplets/hstshijack/domains.txt
+ set hstshijack.ssl.index       /usr/local/share/bettercap/caplets/hstshijack/index.json
+ set hstshijack.ssl.check       true
+ #set hstshijack.blockscripts    example.com,*.example.com
+ set hstshijack.obfuscate       true
+ set hstshijack.encode          true
+ set hstshijack.payloads        *:/usr/local/share/bettercap/caplets/hstshijack/payloads/hijack.js,*:/usr/local/share/bettercap/caplets/hstshijack/payloads/sslstrip.js,*:/usr/local/share/bettercap/caplets/hstshijack/payloads/keylogger.js
+ #set hstshijack.ignore          *
+
+ set http.proxy.script  /usr/local/share/bettercap/caplets/hstshijack/hstshijack.js
+ http.proxy on
+
+ set dns.spoof.domains  *.google.corn,google.corn,gstatic.corn,*.gstatic.corn
+ set dns.spoof.all      true
+ dns.spoof on
+```
+
+Las opciones que querrás entender y modificar serán los valores de
+_hstshijack.targets_ y _hstshijack.replacements_. La opción de _Targets_
+son los dominios que usan HSTS y los que quieres reemplazar, por ejemplo, uno de
+sus valores son _google.com_ y también está _*.google.com_. básicamente, cuando
+pones un asterisco (*) significa que es un wildcard, es decir, que cualquier
+subdominio "**.google.com**" también es un objetivo, y _replacements_ es con lo
+que quieres reemplazar los dominios especificados, por ejemplo, cuando el
+usuario realice una petición a _google.com_ vamos a reemplazar esa dirección con
+_google.corn_.
+
+También puedes jugar con los valores de _hstshijack.obfuscate_ y
+_hstshijack.encode_. lo que harán es obfuscar y codificar el código, ten en
+cuenta que algunos navegadores como Firefox pueden bloquear código obfuscado o
+codificado, así que intenta cambiar sus valores entre _true_ y _false_ para
+ver cual te devuelve los mejores resultados.
+
+Como valor de _hstshijack.payloads_ puedes especificar la locación de otro
+archivo que contenga código JavaScript que quieras inyectar en las páginas que
+visita nuestra víctima, hablaremos sobre inyección JavaScript más a fondo en un
+futuro, y finalmente, debes tener en cuenta que los valores de la opción
+_dns.spoof.domains_ sean los mismo que los _replacements_.
+
+Si modificas este archivo, ten en cuenta que debes guardarlo y reiniciar
+BetterCAP.
+
+Ejecutar este ataque será igual a lo que hicimos en la lección anterior, solo
+debes tener en cuenta que modificaste el archivo _hstshijack.cap_ de manera
+correcta y lo guardaste.
+
+Así que... Solo debes ejecutar BetterCAP:
+
+```bash
+bettercap -iface enp1s0 -caplet ~/arp.cap
+```
+
+Y ejecutar el caplet _hstshijack_:
+
+```bash
+hstshijack/hstshijack
+```

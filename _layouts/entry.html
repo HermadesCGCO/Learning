@@ -1,0 +1,57 @@
+{% include head.html %}
+{% include header.html %}
+
+<div class="container pt-4">
+
+  <div uk-grid>
+
+    <div class="uk-width-3-4@m">
+      <div class="blog-post single-post">
+
+	<div class="blog-post-thumbnail">
+	  <div class="blog-post-thumbnail-inner">
+	    <span class="blog-item-tag">{{ page.category }}</span>
+	    <img src="{{ page.thumb }}">
+	  </div>
+	</div>
+
+	<div class="blog-post-content">
+
+	  <h3>{{ page.title }}</h3>
+	  <div class="mb-2">
+	    <a href="#" class="blog-post-info">{{ page.date }}</a>
+	  </div>
+
+	  {{ page.content | markdownify }}
+
+	</div>
+
+      </div>
+    </div>
+
+    <div class="uk-width-1-4@m">
+
+      <h4>Articulos relacionados</h4>
+
+      {% for entry in site.data.blog.entries %}
+      {% if entry.category == page.category %}
+
+      <a href="{{ entry.url }}">
+	<div class="uk-card-default mb-4 rounded animate-this uk-inline-clip">
+	  <img src="{{ entry.thumb }}">
+	  <div class="p-3">
+	    <p class="mb-2">{{ entry.title }}</p>
+	  </div>
+	</div>
+      </a>
+
+      {% endif %}
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</div>
+
+{% include footer.html %}
